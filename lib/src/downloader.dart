@@ -163,8 +163,10 @@ class FlutterDownloader {
             // allowCellular field is true by default (similar to enqueue())
             allowCellular: (item['allow_cellular'] as bool?) ?? true,
             headers: item['headers'] != null
-                ? Map<String, String>.from(jsonDecode(item['headers']) as Map)
-                : Map<String, String>(),
+                ? Map<String, String>.from(
+                    jsonDecode(item['headers'] as String) as Map,
+                  )
+                : <String, String>{},
           );
         },
       ).toList();
@@ -223,7 +225,11 @@ class FlutterDownloader {
 
             // allowCellular field is true by default (similar to enqueue())
             allowCellular: (item['allow_cellular'] as bool?) ?? true,
-            headers: item['headers'] as Map<String, String>,
+            headers: item['headers'] != null
+                ? Map<String, String>.from(
+              jsonDecode(item['headers'] as String) as Map,
+            )
+                : <String, String>{},
           );
         },
       ).toList();
